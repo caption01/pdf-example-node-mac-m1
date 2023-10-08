@@ -1,8 +1,13 @@
 const puppeteer = require('puppeteer');
 const fs = require('fs');
+const path = require('path')
 
-(async () => {
-  console.log('Lunch Start')
+const currentWorkDir = __dirname
+const htmlDir = path.join(currentWorkDir, 'template', 'sample.html')
+const pdfOutDir = path.join(currentWorkDir, 'out', 'result.pdf')
+
+async function main(){
+  console.log('Lunch Start', { currentWorkDir, htmlDir })
 
   const browser = await puppeteer.launch(
     {
@@ -15,7 +20,7 @@ const fs = require('fs');
   const page = await browser.newPage();
 
   //Get HTML content from HTML file
-  const html = fs.readFileSync('./src/sample.html', 'utf-8');
+  const html = fs.readFileSync(htmlDir, 'utf-8');
   await page.setContent(html, { waitUntil: 'domcontentloaded' });
 
   // To reflect CSS used for screens instead of print
@@ -25,16 +30,18 @@ const fs = require('fs');
 
   // Downlaod the PDF
   const pdf = await page.pdf({
-    path: './src/result.pdf',
+    path: pdfOutDir,
     margin: { top: '100px', right: '50px', bottom: '100px', left: '50px' },
     printBackground: true,
     format: 'A4',
   });
 
-  console.log({ pdf })
+  console.log('Generated pdf')
 
   // Close the browser instance
   await browser.close();
 
-  console.log('Close')
-})();
+  console.log('Closed browser')
+}
+
+main()
