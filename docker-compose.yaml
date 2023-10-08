@@ -3,7 +3,7 @@ services:
   pdf-node:
     build:
       context: .
-      dockerfile: dockerfile
+      dockerfile: dockerfile.alpine
     command: 'node src/index.js'
     volumes:
       - ./src:/app/src

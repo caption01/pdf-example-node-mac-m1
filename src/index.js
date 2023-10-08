@@ -18,8 +18,6 @@ const fs = require('fs');
   const html = fs.readFileSync('./src/sample.html', 'utf-8');
   await page.setContent(html, { waitUntil: 'domcontentloaded' });
 
-  console.log('Setup Screen', { html })
-
   // To reflect CSS used for screens instead of print
   await page.emulateMediaType('screen');
 
