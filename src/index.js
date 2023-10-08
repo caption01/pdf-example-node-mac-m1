@@ -3,14 +3,18 @@ const fs = require('fs');
 
 (async () => {
 
-  // Create a browser instance
-  const browser = await puppeteer.launch();
+  try {
+    // Create a browser instance
+  const browser = await puppeteer.launch({
+    headless: true,
+    args: ['--no-sandbox'],
+  });
 
   // Create a new page
   const page = await browser.newPage();
 
   //Get HTML content from HTML file
-  const html = fs.readFileSync('sample.html', 'utf-8');
+  const html = fs.readFileSync('./src/sample.html', 'utf-8');
   await page.setContent(html, { waitUntil: 'domcontentloaded' });
 
   // To reflect CSS used for screens instead of print
@@ -26,4 +30,8 @@ const fs = require('fs');
 
   // Close the browser instance
   await browser.close();
+  } catch (error) {
+    console.log('Error To Run!', error)
+  }
+  
 })();
