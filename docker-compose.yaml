@@ -5,7 +5,6 @@ services:
       context: .
       dockerfile: dockerfile
     command: 'node src/index.js'
-    platform: linux/amd64
     volumes:
       - ./src:/app/src
 
