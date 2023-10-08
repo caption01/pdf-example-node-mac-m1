@@ -14,3 +14,5 @@ Bug on Mac M1
 Working with
 - [setup docker image with node 16 alpine version]https://pptr.dev/troubleshooting#running-on-alpine
 - [run with node 16 bullseye-slime] https://github.com/juananpe/puppeteer-in-docker-in-m1
+
+Please use dockerfile.alpine for smaller size

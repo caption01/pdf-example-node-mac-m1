@@ -6,6 +6,11 @@ const currentWorkDir = __dirname
 const htmlDir = path.join(currentWorkDir, 'template', 'sample.html')
 const pdfOutDir = path.join(currentWorkDir, 'out', 'result.pdf')
 
+
+async function cleanUp(){
+  await fs.rmSync(pdfOutDir)
+}
+
 async function main(){
   console.log('Lunch Start', { currentWorkDir, htmlDir })
 
@@ -42,6 +47,10 @@ async function main(){
   await browser.close();
 
   console.log('Closed browser')
+
+  // Remove Pdf file After Done process
+  // Uncomment this to auto remove generated pdf
+  // cleanUp()
 }
 
 main()
